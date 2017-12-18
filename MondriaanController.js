@@ -7,41 +7,57 @@
         $scope.original = true;
         $scope.modified = false;
 
-        $scope.setBlank = function(){
+        //USED IN VERSION 2   USED IN VERSION 2   USED IN VERSION 2   USED IN VERSION 2   USED IN VERSION 2   USED IN VERSION 2   
+        $scope.colorSetting = "";
+
+        $scope.setBlank = function () {
             $scope.startBlank = true;
             $scope.original = false;
             $scope.boxesSettings = {};
         }
 
-        $scope.setOriginal = function(){
+        $scope.setOriginal = function () {
             $scope.startBlank = false;
             $scope.original = true;
             $scope.boxesSettings = {};
         }
 
-        $scope.setColor = function(color){
+        //USED IN VERSION 2   USED IN VERSION 2   USED IN VERSION 2   USED IN VERSION 2   USED IN VERSION 2   USED IN VERSION 2   
+        $scope.setColor = function (color) {
             $scope.colorSetting = color;
         }
-        // ng-click="setBoxColor(box.name, colorSetting)"
-        $scope.setBoxColor = function(boxClass, colorSetting){
-            $scope.modified = true;
-            console.log(boxClass, colorSetting)
-            $scope.boxesSettings[boxClass] = colorSetting;
-            console.log($scope.boxesSettings)
+
+        //USED IN VERSION 2   USED IN VERSION 2   USED IN VERSION 2   USED IN VERSION 2   USED IN VERSION 2   USED IN VERSION 2   
+        $scope.setBoxColor = function(box){
+            if ($scope.colorSetting.length === 0){
+                alert("pick a color! :)")
+            } else{
+                box.modifiedcolor = $scope.colorSetting;
+            }
         }
 
-        $scope.getBoxColorSetting = function(boxClass){
-            console.log(boxClass)
+        //USED IN VERSION 2   USED IN VERSION 2   USED IN VERSION 2   USED IN VERSION 2   USED IN VERSION 2   USED IN VERSION 2   
+        $scope.colorDecider = function (box) {
+                //default
+            if ($scope.original && !box.modifiedcolor) {
+                return box.defaultColor
+                //blank
+            } else if ($scope.blank && !box.modifiedcolor) {
+                return "blank"
+                //modified
+            } else if (box.modifiedcolor) {
+                return box.modifiedcolor
+            }
         }
 
+        //USED IN VERSION 2   USED IN VERSION 2   USED IN VERSION 2   USED IN VERSION 2   USED IN VERSION 2   USED IN VERSION 2   
         mondriaanService.getBoxes()
-            .then(function (boxes){
+            .then(function (boxes) {
                 $scope.boxes = boxes.data.boxes;
-                console.log(boxes.data.boxes)
             });
     }
 
     angular.module('colorMeApp').controller('MondriaanController',
-    MondriaanController)
+        MondriaanController)
 
-}) ();
+})();
