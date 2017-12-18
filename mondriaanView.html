@@ -17,8 +17,13 @@
         </div>
 
     <div class="grid bigblackborder">
-        <span class="box01 bigblackborder {{boxesSettings.box01}}" ng-click="setBoxColor('box01', colorSetting)" ng-class="{'blank': startBlank && !boxesSettings.box01, 'lightgrey': original  && !boxesSettings.box01}"></span>
-        <span class="box02 bigblackborder {{boxesSettings.box02}}" ng-click="setBoxColor('box02', colorSetting)" ng-class="{'blank': startBlank && !boxesSettings.box02, 'lightgrey': original  && !boxesSettings.box02}"></span>
+        <span class="bigblackborder {{ original && !boxesSettings[box.name] ?  box.defaultColor : '' }} " ng-class="{'blank': startBlank && !boxesSettings[box.name]}" ng-repeat="box in boxes" ng-style="{'grid-area': box.grid}" ng-click="setBoxColor(box.name, colorSetting)"></span>
+    <!-- <span class="{{boxesSettings.box01}}" ng-click="setBoxColor('box01', colorSetting)" ng-class="{'blank': startBlank && !boxesSettings.box01, 'lightgrey': original  && !boxesSettings.box01}"></span> -->
+
+
+
+        <!-- <span class="box01 bigblackborder {{boxesSettings.box01}}" ng-click="setBoxColor('box01', colorSetting)" ng-class="{'blank': startBlank && !boxesSettings.box01, 'lightgrey': original  && !boxesSettings.box01}"></span> -->
+        <!-- <span class="box02 bigblackborder {{boxesSettings.box02}}" ng-click="setBoxColor('box02', colorSetting)" ng-class="{'blank': startBlank && !boxesSettings.box02, 'lightgrey': original  && !boxesSettings.box02}"></span>
         <span class="box03 bigblackborder {{boxesSettings.box03}}" ng-click="setBoxColor('box03', colorSetting)" ng-class="{'blank': startBlank && !boxesSettings.box03, 'blue': original && !boxesSettings.box03}"></span>
         <span class="box04 bigblackborder {{boxesSettings.box04}}" ng-click="setBoxColor('box04', colorSetting)" ng-class="{'blank': startBlank && !boxesSettings.box04, 'lightgrey': original  && !boxesSettings.box04}"></span>
         <span class="box05 bigblackborder {{boxesSettings.box05}}" ng-click="setBoxColor('box05', colorSetting)" ng-class="{'blank': startBlank && !boxesSettings.box05, 'lightgrey': original  && !boxesSettings.box05}"></span>
@@ -50,6 +55,6 @@
         <span class="box31 bigblackborder {{boxesSettings.box31}}" ng-click="setBoxColor('box31', colorSetting)" ng-class="{'blank': startBlank && !boxesSettings.box31, 'lightgrey': original  && !boxesSettings.box31}"></span>
         <span class="box32 bigblackborder {{boxesSettings.box32}}" ng-click="setBoxColor('box32', colorSetting)" ng-class="{'blank': startBlank && !boxesSettings.box32, 'red': original && !boxesSettings.box32}"></span>
         <span class="box33 bigblackborder {{boxesSettings.box33}}" ng-click="setBoxColor('box33', colorSetting)" ng-class="{'blank': startBlank && !boxesSettings.box33, 'black': original  && !boxesSettings.box33}"></span>
-        <span class="box34 bigblackborder {{boxesSettings.box34}}" ng-click="setBoxColor('box34', colorSetting)" ng-class="{'blank': startBlank && !boxesSettings.box34, 'lightgrey': original  && !boxesSettings.box34}"></span>
+        <span class="box34 bigblackborder {{boxesSettings.box34}}" ng-click="setBoxColor('box34', colorSetting)" ng-class="{'blank': startBlank && !boxesSettings.box34, 'lightgrey': original  && !boxesSettings.box34}"></span> -->
     </div>
 </div>
