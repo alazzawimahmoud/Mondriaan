@@ -1,7 +1,7 @@
 (function (){
     var mondriaanService = function($http){
-      this.getBoxes = function(){
-        return $http.get('boxes.json')
+      this.getData = function(){
+        return $http.get('database.json')
       }
     };
     angular.module('colorMeApp').service('mondriaanService', mondriaanService);

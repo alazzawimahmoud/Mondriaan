@@ -1,21 +1,19 @@
-<div class="grid-container">
-        <h1 class="text-center">Color your own Mondriaan</h1>
-        <div class="button-container"> 
-            <button class="btn-default btn" ng-click="setBlank()">Start blank</button>
-            <button class="btn-default btn" ng-click="setOriginal()">Start with original</button>
+<div class="grid-container flexcenter">
+    <h1>Create your own Mondriaan painting!</h1>
+        <div class="flexbetween"> 
+            <button class="btn-default btn" ng-click="setBlank()">Start with blank canvas</button>
+            <button class="btn-default btn" ng-click="setOriginal()">Start with original canvas</button>
         </div>
-        <div class="button-container">
-            <button class="paint-btn blank" ng-click="setColor('blank')"><i class="material-icons paint-icon">format_paint</i>blank</button>
-            <button class="paint-btn lightgrey" ng-click="setColor('lightgrey')"><i class="material-icons paint-icon">format_paint</i>grey</button>
-            <button class="paint-btn yellow" ng-click="setColor('yellow')"><i class="material-icons paint-icon">format_paint</i>yellow</button>
-            <button class="paint-btn red whitetxt" ng-click="setColor('red')"><i class="material-icons paint-icon">format_paint</i>red</button>
-            <button class="paint-btn blue whitetxt" ng-click="setColor('blue')"><i class="material-icons paint-icon">format_paint</i>blue</button>
-            <button class="paint-btn black whitetxt" ng-click="setColor('black')"><i class="material-icons paint-icon">format_paint</i>black</button>
+        <div class="paintbrush-container flexcenter">
+            <span ng-switch="colorSetting">
+                <h2 ng-switch-when="">pick a color!</h2>
+                <i ng-switch-default class="material-icons bucket-icon" ng-class="colorSetting">format_color_fill</i>
+            </span>
+            <div class="paint-btn-container flexcenter">
+                <button ng-repeat="button in buttons" class="paint-btn flexcenter " ng-class="button.bc" ng-click="setColor(button.bc)" ng-style="{'color': button.tc}"><i class="material-icons paint-icon">format_paint</i>{{button.bc}}</button>
+            </div>
         </div>
-        <div class="selected-color" ng-class="colorSetting">
-            paintbrush color
-        </div>
-
+            
     <div class="grid bigblackborder">
         <span class="bigblackborder" ng-repeat="box in boxes" ng-class="colorDecider(box)" ng-style="{'grid-area': box.grid}" ng-click="setBoxColor(box)"></span>
     </div>

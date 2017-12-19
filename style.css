@@ -1,55 +1,87 @@
 *{
     font-family: 'Source Sans Pro', sans-serif;
 }
-/* GENERAL COLORS */
-.lightgrey{
-    background-color: #e6e6e6;
+/* COLORS & BORDERS */
+.lightgrey{background-color: #e6e6e6;}
+.blue{background-color: #3e11df;}
+.yellow{background-color: #f8e10e;}
+.red{background-color: #d43114;}
+.black{background-color: black;}
+.blank{background-color: transparent;}
+.whitetxt{color: white}
+.bigblackborder{border: 2.5px solid black}
+
+.bucket-icon.lightgrey{
+    color: #e6e6e6;
+    background-color: transparent
 }
 
-.blue{
-    background-color: #3e11df;
-}
+.bucket-icon.blue {
+    color: #3e11df;
+    background-color: transparent;
+} 
 
-.yellow{
-    background-color: #f8e10e;
-}
-
-.red{
-    background-color: #d43114;
-}
-
-.black{
-    background-color: black;
-}
-
-.blank{
+.bucket-icon.yellow {
+    color: #f8e10e;
     background-color: transparent;
 }
 
-.whitetxt{
+.bucket-icon.red {
+    color: #d43114;
+    background-color: transparent;
+}
+
+.bucket-icon.black {
+    background-color: transparent;
+}
+
+.bucket-icon.blank {
     color: white;
+    background-color: #888888;
+}
+
+/* GENERAL */
+.flexcenter{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flexbetween{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;    
+}
+
+h1{
+    font-size: 25px;
+    margin: 20px;
+    padding: 20px;
+    background-color: #f8e10c;
+    border-radius: 5px;
+}
+
+h2{
+    font-size: 18px;
 }
 
 /* BUTTONS */
-.button-container{
-    display: flex;
-    justify-content: space-between;
-}
-
 .btn{
     font-size: 14px;
     height: 50px;
-    width: 150px;
+    width: 200px;
     margin: 10px;
+}
+
+.paint-btn-container{
+    flex-wrap: wrap;
+    width: 350px;
 }
 
 .paint-btn{
     height: 40px;
     width: 100px;
     margin: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .paint-btn:hover{
@@ -61,11 +93,27 @@
     margin: 0 5px;
 }
 
+/* COLOR SETTING */
+.paintbrush-container{
+    width: 440px;
+    flex-wrap: wrap;
+}
+
+.selected-color-box{
+    border: 1px solid #e6e6e6;
+    height: 50px;
+    width: 150px;
+    margin: 10px;
+}
+
+.bucket-icon{
+    font-size: 70px;
+    margin: 5px;
+    padding: 5px;
+}
+
 /* GRID */
 .grid-container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
 }
 
@@ -77,18 +125,3 @@
     width: 725px;
 }
 
-.bigblackborder{
-    border: 2.5px solid black
-}
-
-/* COLOR SETTING */
-
-.selected-color{
-    border: 1px solid #e6e6e6;
-    height: 50px;
-    width: 150px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 10px;
-}

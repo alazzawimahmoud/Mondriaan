@@ -172,5 +172,26 @@
             "modifiedcolor": ""
         }, {
         }
+    ],
+    "buttons":[
+        {
+            "bc": "blank",
+            "tc": "black"
+        }, {
+            "bc": "lightgrey",
+            "tc": "black"
+        }, {
+            "bc": "yellow",
+            "tc": "black"
+        }, {
+            "bc": "red",
+            "tc": "white"
+        }, {
+            "bc": "blue",
+            "tc": "white"
+        }, {
+            "bc": "black",
+            "tc": "white"
+        }
     ]
 }

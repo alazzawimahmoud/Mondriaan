@@ -1,33 +1,37 @@
 (function () {
     var MondriaanController = function ($scope, mondriaanService) {
-        $scope.init = "init";
-        $scope.boxesSettings = {};
 
+        //todo: set standard paintbrushcolor as
+        
         $scope.startBlank = false;
         $scope.original = true;
-        $scope.modified = false;
-
-        //USED IN VERSION 2   USED IN VERSION 2   USED IN VERSION 2   USED IN VERSION 2   USED IN VERSION 2   USED IN VERSION 2   
         $scope.colorSetting = "";
-
+        
+        //start blank/start original functions:
         $scope.setBlank = function () {
+            clearModifiedColors();
             $scope.startBlank = true;
             $scope.original = false;
-            $scope.boxesSettings = {};
         }
 
         $scope.setOriginal = function () {
+            clearModifiedColors();
             $scope.startBlank = false;
             $scope.original = true;
-            $scope.boxesSettings = {};
         }
 
-        //USED IN VERSION 2   USED IN VERSION 2   USED IN VERSION 2   USED IN VERSION 2   USED IN VERSION 2   USED IN VERSION 2   
+        function clearModifiedColors(){
+            $scope.boxes.forEach(function(box){
+                box.modifiedcolor = "";
+            })
+        }
+
+        //sets color of the paintbrush
         $scope.setColor = function (color) {
             $scope.colorSetting = color;
         }
 
-        //USED IN VERSION 2   USED IN VERSION 2   USED IN VERSION 2   USED IN VERSION 2   USED IN VERSION 2   USED IN VERSION 2   
+        //colors the box
         $scope.setBoxColor = function(box){
             if ($scope.colorSetting.length === 0){
                 alert("pick a color! :)")
@@ -36,7 +40,7 @@
             }
         }
 
-        //USED IN VERSION 2   USED IN VERSION 2   USED IN VERSION 2   USED IN VERSION 2   USED IN VERSION 2   USED IN VERSION 2   
+        // used for ngclass
         $scope.colorDecider = function (box) {
                 //default
             if ($scope.original && !box.modifiedcolor) {
@@ -50,10 +54,10 @@
             }
         }
 
-        //USED IN VERSION 2   USED IN VERSION 2   USED IN VERSION 2   USED IN VERSION 2   USED IN VERSION 2   USED IN VERSION 2   
-        mondriaanService.getBoxes()
-            .then(function (boxes) {
-                $scope.boxes = boxes.data.boxes;
+        mondriaanService.getData()
+            .then(function (response) {
+                $scope.boxes = response.data.boxes;
+                $scope.buttons = response.data.buttons;
             });
     }
 
