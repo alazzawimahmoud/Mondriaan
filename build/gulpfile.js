@@ -68,5 +68,3 @@ gulp.task('index', function () {
 
 
 
-// 13 jan
-// to do: exclude gulpfile.js from files to go to build

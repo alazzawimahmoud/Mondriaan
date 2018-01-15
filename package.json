@@ -1,15 +1,27 @@
 {
   "name": "16colorme",
   "version": "1.0.0",
-  "description": "",
-  "main": "MondriaanController.js",
+  "description": "A playfull app to create your own digital Mondiaan Canvas",
+  "main": "BeforeTakingCourse-gulpfile.js",
+  "dependencies": {
+    "del": "^3.0.0",
+    "gulp-inject": "^4.3.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "run-sequence": "^2.2.1"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CelineLon/Mondriaan.git"
+  },
+  "author": "Celine Longeville",
   "license": "ISC",
-  "dependencies": {
-    "browser-sync": "^2.18.13",
-    "gulp": "^3.9.1"
-  }
+  "bugs": {
+    "url": "https://github.com/CelineLon/Mondriaan/issues"
+  },
+  "homepage": "https://github.com/CelineLon/Mondriaan#readme"
 }
