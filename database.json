@@ -1,195 +1,232 @@
 {
-    "boxes":[
+    "boxes": [
         {
             "name": "box01",
             "defaultColor": "ligthgrey",
             "grid": "1/1/3/2",
             "modifiedcolor": ""
-        }, {
+        },
+        {
             "name": "box02",
             "defaultColor": "lightgrey",
             "grid": "1/2/2/7",
             "modifiedcolor": ""
-        }, {
+        },
+        {
             "name": "box03",
             "defaultColor": "blue",
             "grid": "2/2/3/7",
             "modifiedcolor": ""
-        }, {
+        },
+        {
             "name": "box04",
             "defaultColor": "lightgrey",
             "grid": "1/7/2/12",
             "modifiedcolor": ""
-        }, {
+        },
+        {
             "name": "box05",
             "defaultColor": "lightgrey",
             "grid": "2/7/3/9",
             "modifiedcolor": ""
-        }, {
+        },
+        {
             "name": "box06",
             "defaultColor": "blue",
             "grid": "2/9/3/12",
             "modifiedcolor": ""
-        }, {
+        },
+        {
             "name": "box07",
             "defaultColor": "lightgrey",
             "grid": "1/12/4/13",
             "modifiedcolor": ""
-        }, {
+        },
+        {
             "name": "box08",
             "defaultColor": "yellow",
             "grid": "1/13/4/14",
             "modifiedcolor": ""
-        }, {
+        },
+        {
             "name": "box09",
             "defaultColor": "black",
             "grid": "3/1/5/2",
             "modifiedcolor": ""
-        }, {
+        },
+        {
             "name": "box10",
             "defaultColor": "lightgrey",
             "grid": "3/2/5/3",
             "modifiedcolor": ""
-        }, {
+        },
+        {
             "name": "box11",
             "defaultColor": "black",
             "grid": "3/3/7/4",
             "modifiedcolor": ""
-        }, {
+        },
+        {
             "name": "box12",
             "defaultColor": "lightgrey",
             "grid": "3/4/4/6",
             "modifiedcolor": ""
-        }, {
+        },
+        {
             "name": "box13",
             "defaultColor": "lightgrey",
             "grid": "3/6/4/7",
             "modifiedcolor": ""
-        }, {
+        },
+        {
             "name": "box14",
             "defaultColor": "yellow",
             "grid": "3/7/4/9",
             "modifiedcolor": ""
-        }, {
+        },
+        {
             "name": "box15",
             "defaultColor": "red",
             "grid": "3/9/4/11",
             "modifiedcolor": ""
-        }, {
+        },
+        {
             "name": "box16",
             "defaultColor": "red",
             "grid": "3/11/4/12",
             "modifiedcolor": ""
-        }, {
+        },
+        {
             "name": "box17",
             "defaultColor": "yellow",
             "grid": "4/4/5/5",
             "modifiedcolor": ""
-        }, {
+        },
+        {
             "name": "box18",
             "defaultColor": "red",
             "grid": "4/5/5/7",
             "modifiedcolor": ""
-        }, {
+        },
+        {
             "name": "box19",
             "defaultColor": "blue",
             "grid": "4/7/5/9",
             "modifiedcolor": ""
-        }, {
+        },
+        {
             "name": "box20",
             "defaultColor": "lightgrey",
             "grid": "4/9/5/11",
             "modifiedcolor": ""
-        }, {
+        },
+        {
             "name": "box21",
             "defaultColor": "lightgrey",
             "grid": "4/11/5/12",
             "modifiedcolor": ""
-        }, {
+        },
+        {
             "name": "box22",
             "defaultColor": "black",
             "grid": "4/12/5/14",
             "modifiedcolor": ""
-        }, {
+        },
+        {
             "name": "box23",
             "defaultColor": "lightgrey",
             "grid": "5/1/7/2",
             "modifiedcolor": ""
-        }, {
+        },
+        {
             "name": "box24",
             "defaultColor": "red",
             "grid": "5/2/7/3",
             "modifiedcolor": ""
-        }, {
+        },
+        {
             "name": "box25",
             "defaultColor": "yellow",
             "grid": "5/4/8/5",
             "modifiedcolor": ""
-        }, {
+        },
+        {
             "name": "box26",
             "defaultColor": "lightgrey",
             "grid": "5/5/6/8",
             "modifiedcolor": ""
-        }, {
+        },
+        {
             "name": "box27",
             "defaultColor": "lightgrey",
             "grid": "5/8/6/10",
             "modifiedcolor": ""
-        }, {
+        },
+        {
             "name": "box28",
             "defaultColor": "blue",
             "grid": "5/10/6/11",
             "modifiedcolor": ""
-        }, {
+        },
+        {
             "name": "box29",
             "defaultColor": "yellow",
             "grid": "5/11/6/12",
             "modifiedcolor": ""
-        }, {
+        },
+        {
             "name": "box30",
             "defaultColor": "lightgrey",
             "grid": "5/12/6/14",
             "modifiedcolor": ""
-        }, {
+        },
+        {
             "name": "box31",
             "defaultColor": "lightgrey",
             "grid": "7/1/8/4",
             "modifiedcolor": ""
-        }, {
+        },
+        {
             "name": "box32",
             "defaultColor": "red",
             "grid": "6/5/8/7",
             "modifiedcolor": ""
-        }, {
+        },
+        {
             "name": "box33",
             "defaultColor": "black",
             "grid": "6/7/8/10",
             "modifiedcolor": ""
-        }, {
+        },
+        {
             "name": "box34",
             "defaultColor": "lightgrey",
             "grid": "6/10/8/14",
             "modifiedcolor": ""
-        }, {
         }
     ],
-    "buttons":[
+    "buttons": [
         {
             "bc": "blank",
             "tc": "black"
-        }, {
+        },
+        {
             "bc": "lightgrey",
             "tc": "black"
-        }, {
+        },
+        {
             "bc": "yellow",
             "tc": "black"
-        }, {
+        },
+        {
             "bc": "red",
             "tc": "white"
-        }, {
+        },
+        {
             "bc": "blue",
             "tc": "white"
-        }, {
+        },
+        {
             "bc": "black",
             "tc": "white"
         }

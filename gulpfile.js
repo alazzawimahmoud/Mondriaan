@@ -1,47 +1,39 @@
-var gulp = require('gulp');
-runSequence = require('run-sequence');
-del = require('del');
-inject = require('gulp-inject');
+var gulp = require('gulp'),
+    runSequence = require('run-sequence'),
+    del = require('del'),
+    inject = require('gulp-inject'),
+    watch = require('gulp-watch'),
+    rimraf = require('rimraf'),
+    serve = require('gulp-serve'),
+    files = require('./gulp/gulp.config.js'),
+    jshint = require('gulp-jshint'),
+    concat = require('gulp-concat'),
+    uglify = require('gulp-uglify'),
+    angularFilesort = require('gulp-angular-filesort');
 
-// when 'gulp' is called from commandline, default task gets executed
-gulp.task('default', [], function (callback) {
-    // every task in the runSequence gets called
-    runSequence('build', callback)
+
+// DEFAULT
+// gulp.task('default', ['watch']);
+
+gulp.task('default', ['build', 'watch', 'serve']);
+
+gulp.task('watch', function () {
+    //todo: add css & other files to watch, not only js
+    gulp.watch(files.app_files.js, ['lint', 'build'])
 });
 
-
-gulp.task('build', function (callback) {
-    //13 jan
-    runSequence('clean', 'copy-build', 'index', callback)
-
-})
-
-// gulp.task('build', function(callback) {
-//     runSequence('build-clean',
-//                 ['build-scripts', 'build-styles'],
-//                 'build-html',
-//                 callback);
-//   });
-
-gulp.task('clean', function (callback) {
-    del(['./build'], { force: true }, callback)
+gulp.task('build', ['clean'], function () {
+    runSequence('copy-build', 'index');
 });
 
+gulp.task('clean', function (cb) {
+    rimraf('./build', cb);
+});
 
-// gulp.task('copy-app-js', function () {
-//     return gulp.src('./src/ **/*.js')
-//         .pipe(gulp.dest('./build'));
-// });
-
-
-// gulp.task('copy-build', ['copy-js', 'copy-html', 'copy-css', 'copy-data']);
-
-gulp.task('copy-build', function (callback) {
-    runSequence(['copy-js', 'copy-html', 'copy-css', 'copy-data'], callback)
-})
+gulp.task('copy-build', ['copy-js', 'copy-html', 'copy-css', 'copy-data']);
 
 gulp.task('copy-js', function () {
-    return gulp.src('*.js')
+    return gulp.src(['*.js', '!gulpfile.js'])
         .pipe(gulp.dest('./build'));
 });
 gulp.task('copy-html', function () {
@@ -58,15 +50,35 @@ gulp.task('copy-data', function () {
 });
 
 gulp.task('index', function () {
-    // PRO-T: no need for *.html because of routing, correct?
-    var template_source = ['./build/*.js', './build/*.css', './build/*.json'];
-    return gulp.src('./build/index.html')
-        //gulp.src takes (a variable that holds) an array of file path definitions OR a gulp config file => var template_source
-        .pipe(inject(gulp.src(template_source), { ignorePath: './build' }))
+    return gulp.src('index.html')
+        .pipe(inject(
+            gulp.src(files.app_files.js).pipe(angularFilesort())
+        ))
+        .pipe(inject(
+            gulp.src(files.app_files.css)
+        ))
         .pipe(gulp.dest('./build'));
 });
 
+// var sources = gulp.src(['./src/**/*.js', './src/**/*.css'], {read: false});
 
 
-// 13 jan
-// to do: exclude gulpfile.js from files to go to build
+// should serve the files on localhost 3000
+gulp.task('serve', serve('build'));
+
+gulp.task('lint', function () {
+    return gulp.src(files.app_files.js)
+        // pipe into jshint package
+        .pipe(jshint())
+        // pipe into a default reporter which will give feedback
+        .pipe(jshint.reporter('default'));
+});
+
+
+// where the bundling magic happens
+gulp.task('scripts', function () {
+    return gulp.src(files.app_files.js)
+        .pipe(concat('bundle.js'))
+        .pipe(uglify())
+        .pipe(gulp.dest('./build/bundle'))
+})
