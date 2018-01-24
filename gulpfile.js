@@ -9,13 +9,14 @@ var gulp = require('gulp'),
     jshint = require('gulp-jshint'),
     concat = require('gulp-concat'),
     uglify = require('gulp-uglify'),
-    angularFilesort = require('gulp-angular-filesort');
+    angularFilesort = require('gulp-angular-filesort'),
+    sass = require('gulp-sass');
 
 
 // DEFAULT
 // gulp.task('default', ['watch']);
 
-gulp.task('default', ['build', 'watch', 'serve']);
+gulp.task('default', ['sass', 'build', 'watch']);
 
 gulp.task('watch', function () {
     //todo: add css & other files to watch, not only js
@@ -64,7 +65,7 @@ gulp.task('index', function () {
 
 
 // should serve the files on localhost 3000
-gulp.task('serve', serve('build'));
+// gulp.task('serve', serve('build'));
 
 gulp.task('lint', function () {
     return gulp.src(files.app_files.js)
@@ -82,3 +83,14 @@ gulp.task('scripts', function () {
         .pipe(uglify())
         .pipe(gulp.dest('./build/bundle'))
 })
+
+// SASS
+gulp.task('sass', function () {
+    return gulp.src('./sass/**/*.scss')
+        .pipe(sass().on('error', sass.logError))
+        .pipe(gulp.dest('./css'));
+});
+
+gulp.task('sass:watch', function () {
+    gulp.watch('./sass/**/*.scss', ['sass']);
+});

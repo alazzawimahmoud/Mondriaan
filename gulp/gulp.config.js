@@ -3,7 +3,7 @@ module.exports = {
     build_dir: 'build',
     //objects
     app_files: {
-        css: ['*.css', '*.json'],
+        css: ['sass/*.css', '*.json'],
         js: ['*.js', '!gulpfile.js']
     }
 }
