@@ -1,37 +1,75 @@
+// gulp build: 
+//A - prepare for build
+//      1. clean up the old build
+//      2. gulp watch to lint all the files
+//B - repeat linting until all mistakes are fixed
+//C - build the app
+//      3. compile sass to css
+//      4. copy all the files (html, compiled css, js,...)
+//      5. inject the css and js file paths into index.html
+//      6. minify & bundle
+//D - deployment
+//      7. deploy
+//      8. serve/host the deployed site
+
+//@TODO: check if all are needed
 var gulp = require('gulp'),
-    runSequence = require('run-sequence'),
-    del = require('del'),
+    // runSequence = require('run-sequence'),
+    // // del = require('del'),
     inject = require('gulp-inject'),
-    watch = require('gulp-watch'),
+    // watch = require('gulp-watch'),
     rimraf = require('rimraf'),
-    serve = require('gulp-serve'),
-    files = require('./gulp/gulp.config.js'),
+    // serve = require('gulp-serve'),
+    // files = require('./gulp/gulp.config.js'),
     jshint = require('gulp-jshint'),
     concat = require('gulp-concat'),
     uglify = require('gulp-uglify'),
     angularFilesort = require('gulp-angular-filesort'),
-    sass = require('gulp-sass');
+    sass = require('gulp-sass'),
+    sassLint = require('gulp-sass-lint'),
+    htmlLint = require('gulp-html-lint'),
+    gulpsync = require('gulp-sync')(gulp);
 
 
-// DEFAULT
-// gulp.task('default', ['watch']);
+gulp.task('default', gulpsync.sync(['prepare', 'build']))
 
-gulp.task('default', ['sass', 'build', 'watch']);
-
-gulp.task('watch', function () {
-    //todo: add css & other files to watch, not only js
-    gulp.watch(files.app_files.js, ['lint', 'build'])
-});
-
-gulp.task('build', ['clean'], function () {
-    runSequence('copy-build', 'index');
-});
+gulp.task('prepare', ['clean', 'lint']);
 
 gulp.task('clean', function (cb) {
     rimraf('./build', cb);
 });
 
-gulp.task('copy-build', ['copy-js', 'copy-html', 'copy-css', 'copy-data']);
+gulp.task('lint', ['lintjs', 'lintsass', 'linthtml'])
+
+gulp.task('lintjs', function () {
+    return gulp.src(['*.js', '!gulpfile.js',])
+        .pipe(jshint())
+        .pipe(jshint.reporter('default'));
+});
+
+gulp.task('lintsass', function () {
+    return gulp.src(['main.scss'])
+        .pipe(sassLint())
+        .pipe(sassLint.format())
+        .pipe(sassLint.failOnError())
+})
+
+gulp.task('linthtml', function () {
+    return gulp.src(['index.html', 'mondriaanView.html'])
+        .pipe(htmlLint())
+        .pipe(htmlLint.format())
+        .pipe(htmlLint.failOnError())
+})
+
+gulp.task('build', gulpsync.sync(['compilesass', 'copyfiles', 'injectpaths', 'bundle']));
+
+gulp.task('compilesass', function () {
+    return gulp.src('./sass/main.scss')
+        .pipe(sass().on('error', sass.logError))
+        .pipe(gulp.dest('./build'));
+});
+
+gulp.task('copyfiles', ['copy-js', 'copy-html', 'copy-css', 'copy-data']);
 
 gulp.task('copy-js', function () {
     return gulp.src(['*.js', '!gulpfile.js'])
@@ -50,47 +88,20 @@ gulp.task('copy-data', function () {
         .pipe(gulp.dest('./build'));
 });
 
-gulp.task('index', function () {
+gulp.task('injectpaths', function () {
     return gulp.src('index.html')
         .pipe(inject(
-            gulp.src(files.app_files.js).pipe(angularFilesort())
+            gulp.src(['*.js', '!gulpfile.js']).pipe(angularFilesort())
         ))
         .pipe(inject(
-            gulp.src(files.app_files.css)
+            gulp.src('./build/main.css')
         ))
         .pipe(gulp.dest('./build'));
 });
 
-// var sources = gulp.src(['./src/**/*.js', './src/**/*.css'], {read: false});
-
-
-// should serve the files on localhost 3000
-// gulp.task('serve', serve('build'));
-
-gulp.task('lint', function () {
-    return gulp.src(files.app_files.js)
-        // pipe into jshint package
-        .pipe(jshint())
-        // pipe into a default reporter which will give feedback
-        .pipe(jshint.reporter('default'));
-});
-
-
-// where the bundling magic happens
-gulp.task('scripts', function () {
-    return gulp.src(files.app_files.js)
+gulp.task('bundle', function () {
+    return gulp.src(['*.js', '!gulpfile.js'])
         .pipe(concat('bundle.js'))
         .pipe(uglify())
         .pipe(gulp.dest('./build/bundle'))
 })
-
-// SASS
-gulp.task('sass', function () {
-    return gulp.src('./sass/**/*.scss')
-        .pipe(sass().on('error', sass.logError))
-        .pipe(gulp.dest('./css'));
-});
-
-gulp.task('sass:watch', function () {
-    gulp.watch('./sass/**/*.scss', ['sass']);
-});

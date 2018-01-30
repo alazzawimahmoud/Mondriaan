@@ -1,3 +1,123 @@
-.justatest{
-    font-size: 12px;
+@import "helpers/variables.scss";
+
+*{
+    font-family: 'Source Sans Pro', sans-serif;
+    background-color: pink;
 }
+
+.whitetxt{color: white}
+.bigblackborder{border: 2.5px solid black}
+
+.bucket-icon.lightgrey{
+    color: $lightgrey;
+    background-color: $blank
+}
+
+.bucket-icon.blue {
+    color: $blue;
+    background-color: $blank;
+} 
+
+.bucket-icon.yellow {
+    color: $yellow;
+    background-color: $blank;
+}
+
+.bucket-icon.red {
+    color: $red;
+    background-color: $blank;
+}
+
+.bucket-icon.black {
+    background-color: $blank;
+}
+
+.bucket-icon.blank {
+    color: $white;
+    background-color: $middlegrey;
+}
+
+/* GENERAL */
+.flexcenter{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flexbetween{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;    
+}
+
+h1{
+    font-size: 25px;
+    margin: 20px;
+    padding: 20px;
+    background-color: $yellow;
+    border-radius: 5px;
+}
+
+h2{
+    font-size: 18px;
+}
+
+/* BUTTONS */
+.btn{
+    font-size: 14px;
+    height: 50px;
+    width: 200px;
+    margin: 10px;
+}
+
+.paint-btn-container{
+    flex-wrap: wrap;
+    width: 350px;
+}
+
+.paint-btn{
+    height: 40px;
+    width: 100px;
+    margin: 5px;
+    &:hover{
+        border: 3px solid rgb(59, 59, 59)
+    }
+}
+
+.paint-icon{
+    font-size: 14px;
+    margin: 0 5px;
+}
+
+/* COLOR SETTING */
+.paintbrush-container{
+    width: 440px;
+    flex-wrap: wrap;
+}
+
+.selected-color-box{
+    border: 1px solid $lightgrey;
+    height: 50px;
+    width: 150px;
+    margin: 10px;
+}
+
+.bucket-icon{
+    font-size: 70px;
+    margin: 5px;
+    padding: 5px;
+}
+
+/* GRID */
+.grid-container{
+    flex-direction: column;
+}
+
+.grid{
+    display: grid;
+    grid-template-columns: 45px 90px 45px 45px 60px 45px 60px 45px 90px 60px 45px 45px 45px;
+    grid-template-rows: 30px 60px 150px 60px 120px 30px 60px;
+    margin: 50px;
+    width: 725px;
+}
+
