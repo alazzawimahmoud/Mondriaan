@@ -102,6 +102,8 @@ gulp.task('injectpaths', function () {
                 addRootSlash: false,
                 // @mahmoud : This basicly removes any given path from the final result
                 // U can use this same method when injecting the js files above
+                // all options can be found here:
+                // https://github.com/klei/gulp-inject#optionsignorepath
                 ignorePath: ['build']
             }
         ))
