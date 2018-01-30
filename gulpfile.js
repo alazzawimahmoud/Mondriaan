@@ -61,7 +61,8 @@ gulp.task('build', gulpsync.sync(['compilesass', 'copyfiles', 'injectpaths', 'bu
 gulp.task('compilesass', function () {
     return gulp.src('app/css/sass/main.scss')
         .pipe(sass().on('error', sass.logError))
-        .pipe(gulp.dest('./build/compiledstylesheet'));
+        // @mahmoud : I've changed the path to put it right into the build
+        .pipe(gulp.dest('./build'))
 });
 
 gulp.task('copyfiles', ['copy-js', 'copy-html', 'copy-data']);
@@ -70,7 +71,9 @@ gulp.task('copyfiles', ['copy-js', 'copy-html', 'copy-data']);
 
 gulp.task('copy-js', function () {
     return gulp.src(['app/*.js', 'app/!gulpfile.js'])
-        .pipe(gulp.dest('./build'));
+        // @mahmoud : added "/app" so the injected files can
+        // point to the correct path
+        .pipe(gulp.dest('./build/app'));
 });
 gulp.task('copy-html', function () {
     return gulp.src('app/*.html')
@@ -89,11 +92,18 @@ gulp.task('copy-data', function () {
 gulp.task('injectpaths', function () {
     return gulp.src('app/index.html')
         .pipe(inject(
-            gulp.src(['app/*.js', '!app/gulpfile.js']).pipe(angularFilesort())
+            gulp.src(['app/*.js', '!app/gulpfile.js']).pipe(angularFilesort()),
+            // @mahmoud : this removes the slash from the path when injecting files
+            { addRootSlash: false }
             // gulp.src(['app/*.js', '!app/gulpfile.js', 'build/compiledstylesheet/main.css']).pipe(angularFilesort())
         ))
         .pipe(inject(
-            gulp.src('build/compiledstylesheet/main.css')
+            gulp.src('build/compiledstylesheet/main.css'), {
+                addRootSlash: false,
+                // @mahmoud : This basicly removes any given path from the final result
+                // U can use this same method when injecting the js files above
+                ignorePath: ['build']
+            }
         ))
         .pipe(gulp.dest('./build'))
 })
