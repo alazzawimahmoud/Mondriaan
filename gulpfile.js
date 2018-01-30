@@ -12,15 +12,9 @@
 //      7. deploy
 //      8. serve/host the deployed site
 
-//@TODO: check if all are needed
 var gulp = require('gulp'),
-    // runSequence = require('run-sequence'),
-    // // del = require('del'),
     inject = require('gulp-inject'),
-    // watch = require('gulp-watch'),
     rimraf = require('rimraf'),
-    // serve = require('gulp-serve'),
-    // files = require('./gulp/gulp.config.js'),
     jshint = require('gulp-jshint'),
     concat = require('gulp-concat'),
     uglify = require('gulp-uglify'),
@@ -63,42 +57,81 @@ gulp.task('linthtml', function () {
 
 gulp.task('build', gulpsync.sync(['compilesass', 'copyfiles', 'injectpaths', 'bundle']));
 
+
 gulp.task('compilesass', function () {
-    return gulp.src('./sass/main.scss')
+    return gulp.src('app/css/sass/main.scss')
         .pipe(sass().on('error', sass.logError))
-        .pipe(gulp.dest('./build'));
+        .pipe(gulp.dest('./build/compiledstylesheet'));
 });
 
-gulp.task('copyfiles', ['copy-js', 'copy-html', 'copy-css', 'copy-data']);
+gulp.task('copyfiles', ['copy-js', 'copy-html', 'copy-data']);
+// gulp.task('copyfiles', ['copy-js', 'copy-html', 'copy-css', 'copy-data']);
+
 
 gulp.task('copy-js', function () {
-    return gulp.src(['*.js', '!gulpfile.js'])
+    return gulp.src(['app/*.js', 'app/!gulpfile.js'])
         .pipe(gulp.dest('./build'));
 });
 gulp.task('copy-html', function () {
-    return gulp.src('*.html')
+    return gulp.src('app/*.html')
         .pipe(gulp.dest('./build'));
 });
-gulp.task('copy-css', function () {
-    return gulp.src('*.css')
-        .pipe(gulp.dest('./build'));
-});
+// gulp.task('copy-css', function () {
+//     return gulp.src('app/*.css')
+//         .pipe(gulp.dest('./build'));
+// });
 gulp.task('copy-data', function () {
-    return gulp.src('database.json')
+    return gulp.src('app/database.json')
         .pipe(gulp.dest('./build'));
 });
 
+//@TODO: DEBUG (see documentation example below)
 gulp.task('injectpaths', function () {
-    return gulp.src('index.html')
+    return gulp.src('app/index.html')
         .pipe(inject(
-            gulp.src(['*.js', '!gulpfile.js']).pipe(angularFilesort())
+            gulp.src(['app/*.js', '!app/gulpfile.js']).pipe(angularFilesort())
+            // gulp.src(['app/*.js', '!app/gulpfile.js', 'build/compiledstylesheet/main.css']).pipe(angularFilesort())
         ))
         .pipe(inject(
-            gulp.src('./build/main.css')
+            gulp.src('build/compiledstylesheet/main.css')
         ))
-        .pipe(gulp.dest('./build'));
-});
+        .pipe(gulp.dest('./build'))
+})
 
+// var target = gulp.src('index.html'); DOESN'T GIVE A BUG BUT ALSO DOESN'T WORK
+// var target = gulp.src('app/index.html'); DOESN'T WORK
+// var target = gulp.src('./app/index.html'); DOESN'T WORK
+// var sources = gulp.src(['./*.js', '!./gulpfile.js', './build/compiledstylesheet/main.css'], { read: false });
+// var sources = gulp.src(['./*.js', '!./gulpfile.js'], { read: false });
+
+// return target.pipe(inject(sources)).pipe(angularFilesort())
+// .pipe(gulp.dest('./'))
+// });
+
+// previous version of this task:
+// gulp.task('index', function () {
+//     return gulp.src('index.html')
+//         .pipe(inject(
+//             gulp.src(files.app_files.js).pipe(angularFilesort())
+//         ))
+//         .pipe(inject(
+//             gulp.src(files.app_files.css)
+//         ))
+//         .pipe(gulp.dest('./build'));
+// });
+
+
+//EXAMPLE FROM OFFICIAL DOCUMENTATION
+// gulp.task('index', function () {
+//   var target = gulp.src('./src/index.html');
+//   // It's not necessary to read the files (will speed up things), we're only after their paths:
+//   var sources = gulp.src(['./src/**/*.js', './src/**/*.css'], {read: false});
+
+//   return target.pipe(inject(sources))
+//     .pipe(gulp.dest('./src'));
+// });
+
+//@TODO: DEBUG (probably doesn't run because injectpaths doesn't run properly)
 gulp.task('bundle', function () {
     return gulp.src(['*.js', '!gulpfile.js'])
         .pipe(concat('bundle.js'))
